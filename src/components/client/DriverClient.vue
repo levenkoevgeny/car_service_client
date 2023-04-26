@@ -39,7 +39,6 @@
 </template>
 
 <script>
-import { docsAPI } from "@/api/docsAPI"
 import Spinner from "@/components/common/Spinner"
 import { mapGetters } from "vuex"
 import ReconnectingWebSocket from "reconnecting-websocket"
@@ -57,17 +56,18 @@ export default {
       docsList: [],
       isLoading: true,
       isError: false,
+      rws: null
     }
   },
   async created() {
     try {
-      const rws = new ReconnectingWebSocket(
+      this.rws = new ReconnectingWebSocket(
         `${process.env.VUE_APP_BACKEND_PROTOCOL_WS}://${process.env.VUE_APP_BACKEND_HOST}:${process.env.VUE_APP_BACKEND_PORT_WS}/ws/driver/`
       )
 
-      rws.addEventListener("open", () => {})
+      this.rws.addEventListener("open", () => {})
 
-      rws.addEventListener("message", (e) => {
+      this.rws.addEventListener("message", (e) => {
         const data = JSON.parse(e.data)
         this.sendSuccessToast(data["message"])
       })
@@ -78,7 +78,7 @@ export default {
     }
   },
   async unmounted() {
-    // this.rws.close()
+    this.rws.close()
   },
   methods: {
     sendSuccessToast(message) {
@@ -93,9 +93,6 @@ export default {
       userData: "auth/getUser",
       userToken: "auth/getToken",
     }),
-    sortedDocsList() {
-      return this.docsList
-    },
   },
   watch: {},
 }
