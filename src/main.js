@@ -6,6 +6,7 @@ import { library } from "@fortawesome/fontawesome-svg-core"
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome"
 import Toast from "vue-toastification"
 import "vue-toastification/dist/index.css"
+import VueGoogleCharts from "vue-google-charts"
 
 import { faUsers } from "@fortawesome/free-solid-svg-icons"
 import { faUser } from "@fortawesome/free-solid-svg-icons"
@@ -28,4 +29,5 @@ createApp(App)
   .use(router)
   .use(store)
   .use(Toast)
+  .use(VueGoogleCharts)
   .mount("#app")

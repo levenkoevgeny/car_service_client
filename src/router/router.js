@@ -2,7 +2,10 @@ import { createRouter, createWebHistory } from "vue-router"
 
 import NotFoundView from "@/components/common/NotFoundView"
 import LoginView from "@/components/auth/LoginView"
-import DriverClient from "@/components/client/DriverClient"
+import Client from "@/components/client/Client"
+import AdminViewHome from "@/components/admin/AdminViewHome"
+import UsersList from "@/components/admin/usersList"
+import OrdersList from "@/components/admin/OrdersList"
 
 import store from "@/store"
 
@@ -16,9 +19,27 @@ const routes = [
   },
   {
     path: "",
-    name: "driver-client",
-    component: DriverClient,
+    name: "client",
+    component: Client,
     meta: { requiresAuth: true },
+  },
+  {
+    path: "/admin",
+    name: "admin",
+    component: AdminViewHome,
+    meta: { requiresAuth: true, requiresStaff: true },
+    children: [
+      {
+        path: "users",
+        name: "admin-users",
+        component: UsersList,
+      },
+      {
+        path: "orders",
+        name: "admin-orders",
+        component: OrdersList,
+      },
+    ],
   },
 ]
 

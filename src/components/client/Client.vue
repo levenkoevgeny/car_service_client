@@ -1,6 +1,5 @@
 <template>
   <div class="container-fluid">
-    <button @click="sendSuccessToast">Toast</button>
     <!--    <div class="mt-5"></div>-->
 
     <!--    <div class="row">-->
@@ -49,14 +48,14 @@ export default {
     const toast = useToast()
     return { toast }
   },
-  name: "DriverClient",
+  name: "Client",
   components: { Spinner },
   data() {
     return {
       docsList: [],
       isLoading: true,
       isError: false,
-      rws: null
+      rws: null,
     }
   },
   async created() {
