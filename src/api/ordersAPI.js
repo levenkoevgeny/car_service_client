@@ -4,10 +4,10 @@ import { authHeaders } from "@/api/authAPI"
 let base_url = "orders"
 
 export const ordersAPI = {
-  async getItemsList(token, searchForm = { subdivision_name: "", region: "" }) {
-    let { subdivision_name, region } = searchForm
+  async getItemsList(token, searchForm = { order_status: "", driver: "" }) {
+    let { order_status, driver } = searchForm
     return axios.get(
-      `${process.env.VUE_APP_BACKEND_PROTOCOL}://${process.env.VUE_APP_BACKEND_HOST}:${process.env.VUE_APP_BACKEND_PORT}/api/${base_url}`,
+      `${process.env.VUE_APP_BACKEND_PROTOCOL}://${process.env.VUE_APP_BACKEND_HOST}:${process.env.VUE_APP_BACKEND_PORT}/api/${base_url}/?order_status=${order_status}&driver=${driver}`,
       authHeaders(token)
     )
   },
